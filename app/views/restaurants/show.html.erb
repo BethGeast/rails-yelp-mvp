@@ -1,0 +1,24 @@
+<%= link_to "Back to index", restaurants_path, class: "btn btn-primary" %>
+
+<div class="container">
+<h1><%= @restaurant.name %></h1>
+<h3>Type of food: <%= @restaurant.category.capitalize %></h3>
+<p>Find us at: <%= @restaurant.address %> || Phone us at: <%= @restaurant.phone_number %></p>
+</div>
+
+<div class="container">
+  <h4>Reviews</h4>
+  <ul>
+    <% @restaurant.reviews.each do |review| %>
+      <h5><%= review.rating %></h5>
+      <p><%= review.content %></p>
+  <% end %>
+</div>
+
+<div>
+  <%= simple_form_for [@restaurant, @review] do |f| %>
+    <%= f.input :rating, collection: 0..5 %>
+    <%= f.input :content %>
+    <%= f.submit class: "btn btn-primary" %>
+  <% end %>
+</div>
